@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://GameObjects/Rock.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Imported/Space Shooter Pack/PNG/Meteors/meteorGrey_big1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Imported/Smoke Particles/PNG/White puff/whitePuff00.png" type="Texture" id=3]
+
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.00740741, 0.837037, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0 ), 0.0, 10.561, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.2
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.5
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+hue_variation = -0.83
+
+[node name="Rock" type="KinematicBody2D"]
+position = Vector2( 574.835, 436.239 )
+collision_layer = 2
+collision_mask = 9
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RockSprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="RockShape" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -33.2396, -41.1447, -50.2628, 9.15118, -22.4066, 40.8763, 10.0923, 28.4958, 34.0795, 32.3647, 50.329, -1.68176, 23.2466, -41.1447 )
+
+[node name="RockExplosionParticle" type="Particles2D" parent="."]
+material = SubResource( 1 )
+emitting = false
+amount = 32
+lifetime = 1.6
+one_shot = true
+explosiveness = 0.75
+visibility_rect = Rect2( -160, -160, 320, 320 )
+process_material = SubResource( 6 )
+texture = ExtResource( 3 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -160, -160, 320, 320 )
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

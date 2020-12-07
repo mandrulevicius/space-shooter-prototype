@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Background/BackgroundStarScene.gd" type="Script" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.15
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.1
+initial_velocity_random = 0.5
+orbit_velocity = 0.1
+orbit_velocity_random = 0.5
+scale = 2.0
+
+[node name="Star" type="Particles2D"]
+position = Vector2( 589.473, 270.36 )
+amount = 2
+visibility_rect = Rect2( -10, -10, 20, 20 )
+process_material = SubResource( 1 )
+script = ExtResource( 1 )

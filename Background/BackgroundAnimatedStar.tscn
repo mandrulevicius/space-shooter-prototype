@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Background/BackgroundStarSprite.png" type="Texture" id=1]
+[ext_resource path="res://Background/BackgroundAnimatedStar.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2.5, 3.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ), Vector2( 0.6, 0.6 ), Vector2( 0.6, 0.6 ), Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
+}
+
+[node name="BackgroundAnimatedStar" type="Sprite"]
+position = Vector2( 591, 216 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="StarAnimation" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Idle = SubResource( 1 )

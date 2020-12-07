@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Imported/KenneySpaceFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Imported/Kenney Space.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://UI/GameOver.gd" type="Script" id=3]
+
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 2 )
+
+[node name="GameOverScreen" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -165.0
+margin_top = 100.0
+margin_right = 165.0
+margin_bottom = 152.0
+custom_fonts/font = ExtResource( 1 )
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuButton" type="Button" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -126.5
+margin_top = -140.0
+margin_right = 126.5
+margin_bottom = -72.0
+custom_fonts/font = SubResource( 1 )
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="CanvasLayer/MenuButton" to="." method="_on_MenuButton_button_up"]

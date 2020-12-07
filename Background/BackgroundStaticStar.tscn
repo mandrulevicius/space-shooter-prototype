@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Background/BackgroundStarSprite.png" type="Texture" id=1]
+[ext_resource path="res://Background/BackgroundStaticStar.gd" type="Script" id=2]
+
+[node name="BackgroundStaticStar" type="Sprite"]
+position = Vector2( 589.473, 270.36 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

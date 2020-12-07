@@ -1,0 +1,5 @@
+-----------------------
+Global Target Position: (829.3078, 167.525162)
+Global Mouse Position: (828.606506, 164.743713)
+Global Position Difference: (-0.701294, -2.781448)
+-----------------------

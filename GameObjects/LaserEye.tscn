@@ -1,0 +1,105 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://GameObjects/LaserEye.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Art/LaserEye2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Imported/Smoke Particles/PNG/Explosion/explosion00.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 19.6292
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.0222222, 0.362963, 0.711111, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.899836, 0, 1, 1, 0.595149, 0, 1, 0.650809, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 64.0
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 3 )
+
+[sub_resource type="CanvasItemMaterial" id=5]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.22963, 0.681481, 0.866667 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 0.0917503 ), 0.0, 2.528, 0, 0, Vector2( 1, 1 ), 0.336694, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+lifetime_randomness = 0.14
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 7 )
+
+[node name="LaserEye" type="KinematicBody2D"]
+position = Vector2( 917.912, 183.212 )
+collision_layer = 16
+collision_mask = 9
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="EyeShape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="EyeSprite" type="Sprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+
+[node name="EyeVision" type="RayCast2D" parent="."]
+scale = Vector2( 2, 2 )
+enabled = true
+cast_to = Vector2( 0, 300 )
+collision_mask = 3
+
+[node name="EyeLaser" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 12 )
+width = 1.0
+default_color = Color( 1, 0, 0, 1 )
+antialiased = true
+
+[node name="EyeLaserImpact" type="Particles2D" parent="EyeLaser"]
+position = Vector2( 20, 20 )
+emitting = false
+lifetime = 0.15
+randomness = 0.5
+process_material = SubResource( 4 )
+
+[node name="EyeExplosionParticle" type="Particles2D" parent="."]
+material = SubResource( 5 )
+scale = Vector2( 0.2, 0.2 )
+emitting = false
+amount = 16
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.8
+randomness = 0.2
+visibility_rect = Rect2( -500, -500, 1000, 1000 )
+process_material = SubResource( 10 )
+texture = ExtResource( 3 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -100, -100, 200, 200 )
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

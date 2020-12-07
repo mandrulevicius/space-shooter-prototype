@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Peashooter1.ogg-fc70cbc2a25c3f9455029709cf645212.oggstr"
+
+[deps]
+
+source_file="res://Assets/Audio/Peashooter1.ogg"
+dest_files=[ "res://.import/Peashooter1.ogg-fc70cbc2a25c3f9455029709cf645212.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
